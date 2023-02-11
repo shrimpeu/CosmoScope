@@ -211,7 +211,7 @@ Lz_pioneer = Coordinates(reg_pos,9)[2]
 fig = plt.figure("Solar System simulation (C) Marwa Kadhem")
 
 figManager = plt.get_current_fig_manager()
-figManager.window.showMaximized()           # maximize window automatically
+figManager.window.state('zoomed')        # maximize window automatically
 
 ax = plt.axes(projection='3d')              # 3D plot
 

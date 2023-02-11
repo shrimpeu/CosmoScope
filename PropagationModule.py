@@ -17,7 +17,7 @@ Copyright (C) 2022 Marwa Kadhem
 
 
 import matplotlib.pyplot as plt
-from matplotlib import animation
+from matplotlib import *
 from SimulationParameters import * 
 
 
