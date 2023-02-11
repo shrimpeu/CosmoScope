@@ -14,7 +14,7 @@ License: MIT License (MIT)
 
 Copyright (C) 2022 Marwa Kadhem 
 """
-
+from matplotlib import animation
 
 from SimulationParameters import *
 from PropagationModule import *
@@ -23,62 +23,62 @@ from PropagationModule import *
 
 
 def animate_func(i):
-    
+
     #--------------------------------------------------------------------------------------
     # PROCEDURE
     # Animating the plot for real time results.
     #--------------------------------------------------------------------------------------
-    
-    ax.clear() 
+
+    ax.clear()
     ax.set_axis_off()
-    
+
     ax.scatter(0,0,0, s=150, c="yellow")
     ax.text(0,0,0,"Sun",color="white")
-    
+
     ax.set_xlim3d([-Lx_neptune[-1], Lx_neptune[-1]])
     ax.set_ylim3d([-Ly_neptune[-1], Ly_neptune[-1]])
     ax.set_zlim3d([-Lz_neptune[-1], Lz_neptune[-1]])
 
     if timescale[i] <= t_end:
-        
+
         ax.plot(Lx_venus[:i+1],Ly_venus[:i+1],Lz_venus[:i+1],c="#E9ECAA",linewidth=1.2)
         ax.scatter(Lx_venus[i],Ly_venus[i],Lz_venus[i], s=10,c='#E9CA09', marker='o')
         ax.text(5+Lx_venus[i],5+Ly_venus[i],5+Lz_venus[i],"Venus",color="white")
-        
+
         ax.plot(Lx_jupiter[:i+1],Ly_jupiter[:i+1],Lz_jupiter[:i+1], c="#EBC0B7",linewidth=1.2)
         ax.scatter(Lx_jupiter[i],Ly_jupiter[i],Lz_jupiter[i],s=70, c='#B3280A', marker='o')
         ax.text(5+Lx_jupiter[i],5+Ly_jupiter[i],5+Lz_jupiter[i],"Jupiter",color="white")
-        
-        
+
+
         ax.plot(Lx_saturn[:i+1],Ly_saturn[:i+1],Lz_saturn[:i+1],c="#BDB9AD",linewidth=1.2)
         ax.scatter(Lx_saturn[i],Ly_saturn[i],Lz_saturn[i],s=55, c='#7C5029', marker='o')
         ax.text(5+Lx_saturn[i],5+Ly_saturn[i],5+Lz_saturn[i],"Saturn",color="white")
-        
+
         ax.plot(Lx_uranus[:i+1],Ly_uranus[:i+1],Lz_uranus[:i+1], c="#A2D2DC",linewidth=1.2)
         ax.scatter(Lx_uranus[i],Ly_uranus[i],Lz_uranus[i],s=30, c='#0598B6', marker='o')
         ax.text(5+Lx_uranus[i],5+Ly_uranus[i],5+Lz_uranus[i],"Uranus",color="white")
-        
+
         ax.plot(Lx_neptune[:i+1],Ly_neptune[:i+1],Lz_neptune[:i+1], c="#BCE9BA",linewidth=1.2)
         ax.scatter(Lx_neptune[i],Ly_neptune[i],Lz_neptune[i],s=30, c='#118A0B', marker='o')
         ax.text(5+Lx_neptune[i],5+Ly_neptune[i],5+Lz_neptune[i],"Neptune",color="white")
-        
+
         ax.plot(Lx_pioneer[:i+1],Ly_pioneer[:i+1],Lz_pioneer[:i+1],c="r",label="Pioneer 10 propagated",linewidth=1.2,linestyle='--')
         ax.scatter(Lx_pioneer[i],Ly_pioneer[i],Lz_pioneer[i],s=50, c='r', marker='s')
         ax.text(5+Lx_pioneer[i],5+Ly_pioneer[i],5+Lz_pioneer[i],"Pioneer 10",color="white")
-        
+
         ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i],"C", 3))
-        
+
     else:
-        
+
         simulation.event_source.stop()
         print("Simulation ended successfully.")
 
 def anim_energ(i):
-    
+
     ax2.clear()
     ax2.plot(timescale[:i+1],Ltot[:i+1])
     ax2.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i],"C", 3))
-    
+
 
 #==================================================================
 #                               MAIN
@@ -93,7 +93,7 @@ vel_sun = Ephemeris(t_start,'SUN')[1]
 m_sun = 1.989e30
 
 
-# Mercury 
+# Mercury
 mercury_id = 1
 pos_mercury = Ephemeris(t_start,'MERCURY')[0]
 vel_mercury = Ephemeris(t_start,'MERCURY')[1]
@@ -102,51 +102,51 @@ m_mercury = 0.330e24
 
 # Mars
 mars_id = 2
-pos_mars = Ephemeris(t_start,'MARS BARYCENTER')[0]  
-vel_mars = Ephemeris(t_start,'MARS BARYCENTER')[1]   
+pos_mars = Ephemeris(t_start,'MARS BARYCENTER')[0]
+vel_mars = Ephemeris(t_start,'MARS BARYCENTER')[1]
 m_mars = 0.642e24
 
 
 # Earth
 earth_id = 3
-pos_earth = Ephemeris(t_start,'EARTH')[0]  
-vel_earth = Ephemeris(t_start,'EARTH')[1]  
+pos_earth = Ephemeris(t_start,'EARTH')[0]
+vel_earth = Ephemeris(t_start,'EARTH')[1]
 m_earth = 5.97e24
 
 # Venus
 venus_id = 4
-pos_venus = Ephemeris(t_start,'VENUS')[0]    
-vel_venus = Ephemeris(t_start,'VENUS')[1]  
+pos_venus = Ephemeris(t_start,'VENUS')[0]
+vel_venus = Ephemeris(t_start,'VENUS')[1]
 m_venus = 4.87e24
 
 
 # Jupiter
 jupiter_id = 5
-pos_jupiter = Ephemeris(t_start,'JUPITER BARYCENTER')[0]  
-vel_jupiter = Ephemeris(t_start,'JUPITER BARYCENTER')[1]  
+pos_jupiter = Ephemeris(t_start,'JUPITER BARYCENTER')[0]
+vel_jupiter = Ephemeris(t_start,'JUPITER BARYCENTER')[1]
 m_jupiter = 1898e24
 
 # Saturn
 saturn_id = 6
-pos_saturn = Ephemeris(t_start,'SATURN BARYCENTER')[0]  
-vel_saturn = Ephemeris(t_start,'SATURN BARYCENTER')[1] 
+pos_saturn = Ephemeris(t_start,'SATURN BARYCENTER')[0]
+vel_saturn = Ephemeris(t_start,'SATURN BARYCENTER')[1]
 m_saturn = 568e24
 
 # Uranus
 uranus_id = 7
-pos_uranus = Ephemeris(t_start,'URANUS BARYCENTER')[0]  
-vel_uranus = Ephemeris(t_start,'URANUS BARYCENTER')[1]  
+pos_uranus = Ephemeris(t_start,'URANUS BARYCENTER')[0]
+vel_uranus = Ephemeris(t_start,'URANUS BARYCENTER')[1]
 m_uranus = 86.8e24
 
 # Neptune
 neptune_id = 8
-pos_neptune = Ephemeris(t_start,'NEPTUNE BARYCENTER')[0]  
-vel_neptune = Ephemeris(t_start,'NEPTUNE BARYCENTER')[1]  
+pos_neptune = Ephemeris(t_start,'NEPTUNE BARYCENTER')[0]
+vel_neptune = Ephemeris(t_start,'NEPTUNE BARYCENTER')[1]
 m_neptune = 102e24
 
 # Pioneer 10
-pos_pioneer = Ephemeris(t_start,'P10')[0]  
-vel_pioneer = Ephemeris(t_start,'P10')[1]  
+pos_pioneer = Ephemeris(t_start,'P10')[0]
+vel_pioneer = Ephemeris(t_start,'P10')[1]
 m_pioneer = 258
 
 
@@ -205,18 +205,18 @@ Lz_pioneer = Coordinates(reg_pos,9)[2]
 
 
 # Animation show the evolution of bodies in the Solar System
-    
-#----------------------- 3D solar system figure   
+
+#----------------------- 3D solar system figure
 
 fig = plt.figure("Solar System simulation (C) Marwa Kadhem")
 
 figManager = plt.get_current_fig_manager()
-figManager.window.state('zoomed')        # maximize window automatically
+figManager.window.state('zoomed')          # maximize window automatically
 
 ax = plt.axes(projection='3d')              # 3D plot
 
 plt.rcParams['axes.facecolor'] = 'black'    # axes in black
-plt.rcParams['text.color'] = 'white'        # texts in white 
+plt.rcParams['text.color'] = 'white'        # texts in white
 fig.set_facecolor('black')                  # black background
 
 ax.view_init(elev=-89, azim=24)             # initial orientation of simulation
@@ -246,11 +246,10 @@ ax2.tick_params(axis='y', colors='w')
 
 plt.xlabel('Time (sec)') # x-axis name
 plt.ylabel('Total energy (J)') # y-axis name
-    
+
 simu_energy = animation.FuncAnimation(fig2, anim_energ, frames=abs(int(t_end)), interval=100)
 
 plt.show()
-
 
 
 
