@@ -11,7 +11,7 @@ def animate_func(i):
     # PROCEDURE
     # Animating the plot for real time results.
     #--------------------------------------------------------------------------------------
-    ax.set_facecolor('black')
+    ax.set_facecolor('black')            # Sets the color of imaginary square to black
 
     ax.clear()
     ax.set_axis_off()
