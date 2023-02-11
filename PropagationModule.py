@@ -27,35 +27,6 @@ def Ephemeris(ref_time,body):
 
 
 
-def Ephemeris_P10():
-    
-    #----------------------------------------------------------------
-    # INPUT
-    # None
-    #----------------------------------------------------------------
-    # OUTPUT
-    # (Lx,Ly,Lz) : 3 lists containig respectively all x, y and z
-    #              values of the Pioneer 10 spacecraft from NASA 
-    #              SPICE ephemeris.
-    #----------------------------------------------------------------
-    
-    global t_start, dt
-    t_end = spice.spiceypy.str2et('1990 Jan 01 00:00:00.0000') 
-    
-    Lx=[]
-    Ly=[]
-    Lz=[]
-    
-    for t in np.arange(t_start,t_end,dt):
-        real_pos = Ephemeris(t,'P10')[0][0]
-        Lx.append(real_pos[0])
-        Ly.append(real_pos[1])
-        Lz.append(real_pos[2])
-        
-    return (Lx,Ly,Lz)
-
-
-
 def NbodyProblem(pos, mass):
     
     #-----------------------------------------------------------------

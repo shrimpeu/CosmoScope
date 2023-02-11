@@ -180,7 +180,7 @@ Lz_neptune = Coordinates(reg_pos,8)[2]
 
 #----------------------- 3D solar system figure
 
-fig = plt.figure("Solar System simulation (C) Marwa Kadhem")
+fig = plt.figure()
 
 figManager = plt.get_current_fig_manager()
 figManager.window.state('zoomed')          # maximize window automatically
@@ -199,28 +199,11 @@ timescale = np.arange(t_start, t_end+2*dt, dt) # generating time scale
 simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)))
 
 
-#-------------------------- Total energy figure
-
-fig2 = plt.figure("Total energy in real time (C) Marwa Kadhem ",figsize=(5, 3))
-
-# Calculating the energies
-
-Ltime, Lke, Lpe, Ltot = EnergyOverTime(reg_pos, reg_vel, mass)
-
-fig2.set_facecolor('black')                  # black background
-ax2 = plt.gca()
-
-ax2.spines['bottom'].set_color('w')         # white axis
-ax2.spines['left'].set_color('w')
-ax2.xaxis.label.set_color('w')
-ax2.tick_params(axis='x', colors='w')
-ax2.yaxis.label.set_color('w')
-ax2.tick_params(axis='y', colors='w')
 
 plt.xlabel('Time (sec)') # x-axis name
 plt.ylabel('Total energy (J)') # y-axis name
 
-simu_energy = animation.FuncAnimation(fig2, anim_energ, frames=abs(int(t_end)), interval=100)
+simu_energy = animation.FuncAnimation(fig, anim_energ, frames=abs(int(t_end)), interval=100)
 
 plt.show()
 
