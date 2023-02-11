@@ -25,21 +25,32 @@ def animate_func(i):
 
     if timescale[i] <= t_end:
 
+        ax.plot(Lx_mercury[:i+1],Ly_mercury[:i+1],Lz_mercury[:i+1],c="#ffffff",linewidth=1.2)
+        ax.scatter(Lx_mercury[i],Ly_mercury[i],Lz_mercury[i], s=0.38,c='#808080', marker='o')
+        ax.text(5+Lx_mercury[i],5+Ly_mercury[i],5+Lz_mercury[i],"Mercury",color="white")
+
         ax.plot(Lx_venus[:i+1],Ly_venus[:i+1],Lz_venus[:i+1],c="#E9ECAA",linewidth=1.2)
         ax.scatter(Lx_venus[i],Ly_venus[i],Lz_venus[i], s=10,c='#E9CA09', marker='o')
         ax.text(5+Lx_venus[i],5+Ly_venus[i],5+Lz_venus[i],"Venus",color="white")
+
+        ax.plot(Lx_earth[:i + 1], Ly_earth[:i + 1], Lz_earth[:i + 1], c="#E9ECAA", linewidth=1.2)
+        ax.scatter(Lx_earth[i], Ly_earth[i], Lz_earth[i], s=10.72, c='#0000ff', marker='o')
+        ax.text(5 + Lx_earth[i], 5 + Ly_earth[i], 5 + Lz_earth[i], "Earth", color="white")
+
+        ax.plot(Lx_mars[:i + 1], Ly_mars[:i + 1], Lz_mars[:i + 1], c="#E9ECAA", linewidth=1.2)
+        ax.scatter(Lx_mars[i], Ly_mars[i], Lz_mars[i], s=10.72, c='#ff0000', marker='o')
+        ax.text(5 + Lx_mars[i], 5 + Ly_mars[i], 5 + Lz_mars[i], "Mars", color="white")
 
         ax.plot(Lx_jupiter[:i+1],Ly_jupiter[:i+1],Lz_jupiter[:i+1], c="#EBC0B7",linewidth=1.2)
         ax.scatter(Lx_jupiter[i],Ly_jupiter[i],Lz_jupiter[i],s=70, c='#B3280A', marker='o')
         ax.text(5+Lx_jupiter[i],5+Ly_jupiter[i],5+Lz_jupiter[i],"Jupiter",color="white")
 
-
         ax.plot(Lx_saturn[:i+1],Ly_saturn[:i+1],Lz_saturn[:i+1],c="#BDB9AD",linewidth=1.2)
-        ax.scatter(Lx_saturn[i],Ly_saturn[i],Lz_saturn[i],s=55, c='#7C5029', marker='o')
+        ax.scatter(Lx_saturn[i],Ly_saturn[i],Lz_saturn[i],s=55.4, c='#7C5029', marker='o')
         ax.text(5+Lx_saturn[i],5+Ly_saturn[i],5+Lz_saturn[i],"Saturn",color="white")
 
         ax.plot(Lx_uranus[:i+1],Ly_uranus[:i+1],Lz_uranus[:i+1], c="#A2D2DC",linewidth=1.2)
-        ax.scatter(Lx_uranus[i],Ly_uranus[i],Lz_uranus[i],s=30, c='#0598B6', marker='o')
+        ax.scatter(Lx_uranus[i],Ly_uranus[i],Lz_uranus[i],s=30, c='#088F8F', marker='o')
         ax.text(5+Lx_uranus[i],5+Ly_uranus[i],5+Lz_uranus[i],"Uranus",color="white")
 
         ax.plot(Lx_neptune[:i+1],Ly_neptune[:i+1],Lz_neptune[:i+1], c="#BCE9BA",linewidth=1.2)
@@ -197,11 +208,6 @@ ax.view_init(elev=-89, azim=24)             # initial orientation of simulation
 timescale = np.arange(t_start, t_end+2*dt, dt) # generating time scale
 
 simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)))
-
-
-
-plt.xlabel('Time (sec)') # x-axis name
-plt.ylabel('Total energy (J)') # y-axis name
 
 simu_energy = animation.FuncAnimation(fig, anim_energ, frames=abs(int(t_end)), interval=100)
 
