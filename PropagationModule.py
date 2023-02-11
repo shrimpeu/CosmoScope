@@ -1,21 +1,3 @@
-"""
-Creation date: May 19 2022
-
-Author: Marwa Kadhem, 4th year student in aerospace systems engineering
-at Institut Polytechnique des Sciences Avancées, France
-
-Purpose: this program provides a 3D simulation of the Solar System by
-propagating (Verlet-Störmer integration) the orbit of each celestial body, 
-in addition to the interplanetary trajectory of Pioneer 10. The initial 
-conditions used to solve the n-body problem are generated using the ephemeris 
-imported from the SPICE files (spiceypy library). 
-
-License: MIT License (MIT)
-
-Copyright (C) 2022 Marwa Kadhem 
-"""
-
-
 import matplotlib.pyplot as plt
 from matplotlib import *
 from SimulationParameters import * 

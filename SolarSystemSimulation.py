@@ -1,19 +1,3 @@
-"""
-Creation date: May 19 2022
-
-Author: Marwa Kadhem, 4th year student in aerospace systems engineering
-at Institut Polytechnique des Sciences Avancées, France
-
-Purpose: this program provides a 3D simulation of the Solar System by
-propagating (Verlet-Störmer integration) the orbit of each celestial body, 
-in addition to the interplanetary trajectory of Pioneer 10. The initial 
-conditions used to solve the n-body problem are generated using the ephemeris 
-imported from the SPICE files (spiceypy library). 
-
-License: MIT License (MIT)
-
-Copyright (C) 2022 Marwa Kadhem 
-"""
 from matplotlib import animation
 
 from SimulationParameters import *
@@ -215,8 +199,9 @@ figManager.window.state('zoomed')          # maximize window automatically
 
 ax = plt.axes(projection='3d')              # 3D plot
 
+
 plt.rcParams['axes.facecolor'] = 'black'    # axes in black
-plt.rcParams['text.color'] = 'white'        # texts in white
+plt.rcParams['text.color'] = 'black'        # texts in white
 fig.set_facecolor('black')                  # black background
 
 ax.view_init(elev=-89, azim=24)             # initial orientation of simulation
