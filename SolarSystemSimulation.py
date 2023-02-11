@@ -5,13 +5,13 @@ from PropagationModule import *
 
 
 
-
 def animate_func(i):
 
     #--------------------------------------------------------------------------------------
     # PROCEDURE
     # Animating the plot for real time results.
     #--------------------------------------------------------------------------------------
+    ax.set_facecolor('black')
 
     ax.clear()
     ax.set_axis_off()
