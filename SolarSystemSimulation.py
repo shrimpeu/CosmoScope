@@ -46,10 +46,6 @@ def animate_func(i):
         ax.scatter(Lx_neptune[i],Ly_neptune[i],Lz_neptune[i],s=30, c='#118A0B', marker='o')
         ax.text(5+Lx_neptune[i],5+Ly_neptune[i],5+Lz_neptune[i],"Neptune",color="white")
 
-        ax.plot(Lx_pioneer[:i+1],Ly_pioneer[:i+1],Lz_pioneer[:i+1],c="r",label="Pioneer 10 propagated",linewidth=1.2,linestyle='--')
-        ax.scatter(Lx_pioneer[i],Ly_pioneer[i],Lz_pioneer[i],s=50, c='r', marker='s')
-        ax.text(5+Lx_pioneer[i],5+Ly_pioneer[i],5+Lz_pioneer[i],"Pioneer 10",color="white")
-
         ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i],"C", 3))
 
     else:
@@ -128,19 +124,15 @@ pos_neptune = Ephemeris(t_start,'NEPTUNE BARYCENTER')[0]
 vel_neptune = Ephemeris(t_start,'NEPTUNE BARYCENTER')[1]
 m_neptune = 102e24
 
-# Pioneer 10
-pos_pioneer = Ephemeris(t_start,'P10')[0]
-vel_pioneer = Ephemeris(t_start,'P10')[1]
-m_pioneer = 258
 
 
 # Initial conditions mass, positions and velocities with ephemeris
 
-mass = np.array([m_sun,m_mercury,m_mars,m_earth,m_venus,m_jupiter,m_saturn,m_uranus,m_neptune,m_pioneer])
+mass = np.array([m_sun,m_mercury,m_mars,m_earth,m_venus,m_jupiter,m_saturn,m_uranus,m_neptune])
 
-pos_init = np.concatenate((pos_sun,pos_mercury,pos_mars,pos_earth,pos_venus,pos_jupiter,pos_saturn,pos_uranus,pos_neptune,pos_pioneer),axis=0)
+pos_init = np.concatenate((pos_sun,pos_mercury,pos_mars,pos_earth,pos_venus,pos_jupiter,pos_saturn,pos_uranus,pos_neptune),axis=0)
 
-vel_init = np.concatenate((vel_sun,vel_mercury,vel_mars,vel_earth,vel_venus,vel_jupiter,vel_saturn,vel_uranus,vel_neptune,vel_pioneer),axis=0)
+vel_init = np.concatenate((vel_sun,vel_mercury,vel_mars,vel_earth,vel_venus,vel_jupiter,vel_saturn,vel_uranus,vel_neptune),axis=0)
 
 
 
@@ -182,10 +174,6 @@ Lz_uranus = Coordinates(reg_pos,7)[2]
 Lx_neptune = Coordinates(reg_pos,8)[0]
 Ly_neptune = Coordinates(reg_pos,8)[1]
 Lz_neptune = Coordinates(reg_pos,8)[2]
-
-Lx_pioneer = Coordinates(reg_pos,9)[0]
-Ly_pioneer = Coordinates(reg_pos,9)[1]
-Lz_pioneer = Coordinates(reg_pos,9)[2]
 
 
 # Animation show the evolution of bodies in the Solar System
