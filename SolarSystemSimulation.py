@@ -1,5 +1,3 @@
-import matplotlib.image as mpimg
-from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import animation
 
 from SimulationParameters import *
@@ -7,8 +5,8 @@ from PropagationModule import *
 import numpy as np
 
 
-
 def animate_func(i):
+    fig.canvas.mpl_connect('scroll_event', handle_scroll)  # connects 'scroll_event' and handle_scroll function
     # --------------------------------------------------------------------------------------
     # PROCEDURE
     # Animating the plot for real time results.
@@ -19,7 +17,7 @@ def animate_func(i):
     ax.clear()
     ax.set_axis_off()
 
-    width = 1366
+    width = 900
     border = 950
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
 
@@ -70,6 +68,23 @@ def animate_func(i):
 
         simulation.event_source.stop()
         print("Simulation ended successfully.")
+
+# Zoom function
+def handle_scroll(event):
+    axtemp = event.inaxes
+    if axtemp is not None:
+        if event.button == 'up':
+            # Zoom in
+            axtemp.set_xlim(axtemp.get_xlim()[0]*0.9, axtemp.get_xlim()[1]*0.9)
+            axtemp.set_ylim(axtemp.get_ylim()[0]*0.9, axtemp.get_ylim()[1]*0.9)
+            axtemp.set_zlim(axtemp.get_zlim()[0]*0.9, axtemp.get_zlim()[1]*0.9)
+        elif event.button == 'down':
+            # Zoom out
+            axtemp.set_xlim(axtemp.get_xlim()[0]*1.1, axtemp.get_xlim()[1]*1.1)
+            axtemp.set_ylim(axtemp.get_ylim()[0]*1.1, axtemp.get_ylim()[1]*1.1)
+            axtemp.set_zlim(axtemp.get_zlim()[0]*1.1, axtemp.get_zlim()[1]*1.1)
+        plt.draw()
+
 
 
 # ==================================================================
@@ -184,13 +199,16 @@ Lz_neptune = Coordinates(reg_pos, 8)[2]
 
 # 3D solar system figure
 
-fig = plt.figure(figsize=(30, 36), dpi=115)
+fig = plt.figure(figsize=(30, 36), dpi=150)
+ax = fig.add_subplot(111, projection='3d')  # 3D plot
+
+
 plt.tight_layout()
+
 
 figManager = plt.get_current_fig_manager()
 figManager.window.state('zoomed')  # maximize window automatically
 
-ax = fig.add_subplot(111, projection='3d')  # 3D plot
 
 plt.rcParams['axes.facecolor'] = 'black'  # axes in black
 plt.rcParams['text.color'] = 'white'  # texts in white
@@ -203,5 +221,6 @@ timescale = np.arange(t_start, t_end + 2 * dt, dt)  # generating time scale
 simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)), blit=False)
 
 fig.subplots_adjust(left=5, right=10, bottom=5, top=10)
+
 
 plt.show()
