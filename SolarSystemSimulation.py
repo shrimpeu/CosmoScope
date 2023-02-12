@@ -64,11 +64,6 @@ def animate_func(i):
         simulation.event_source.stop()
         print("Simulation ended successfully.")
 
-def anim_energ(i):
-
-    ax2.clear()
-    ax2.plot(timescale[:i+1],Ltot[:i+1])
-    ax2.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i],"C", 3))
 
 
 #==================================================================
@@ -191,7 +186,8 @@ Lz_neptune = Coordinates(reg_pos,8)[2]
 
 #----------------------- 3D solar system figure
 
-fig = plt.figure()
+fig = plt.figure(figsize=(38, 36), dpi=250)
+plt.tight_layout()
 
 figManager = plt.get_current_fig_manager()
 figManager.window.state('zoomed')          # maximize window automatically
@@ -200,7 +196,7 @@ ax = plt.axes(projection='3d')              # 3D plot
 
 
 plt.rcParams['axes.facecolor'] = 'black'    # axes in black
-plt.rcParams['text.color'] = 'black'        # texts in white
+plt.rcParams['text.color'] = 'white'        # texts in white
 fig.set_facecolor('black')                  # black background
 
 ax.view_init(elev=-89, azim=24)             # initial orientation of simulation
@@ -209,7 +205,6 @@ timescale = np.arange(t_start, t_end+2*dt, dt) # generating time scale
 
 simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)))
 
-simu_energy = animation.FuncAnimation(fig, anim_energ, frames=abs(int(t_end)), interval=100)
 
 plt.show()
 
