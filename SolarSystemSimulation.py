@@ -6,7 +6,7 @@ from SimulationParameters import *
 from PropagationModule import *
 import numpy as np
 
-img = mpimg.imread("F:\College\Python\pythonProject - converter\CosmoScope-main\space2.jpg")
+
 
 def animate_func(i):
     # --------------------------------------------------------------------------------------
@@ -14,13 +14,12 @@ def animate_func(i):
     # Animating the plot for real time results.
     # --------------------------------------------------------------------------------------
 
-    # ax.set_facecolor('black')             # Sets the color of imaginary square to black
+    ax.set_facecolor('black')             # Sets the color of imaginary square to black
 
     ax.clear()
     ax.set_axis_off()
-    ax.imshow(img, aspect = 'auto')         # sets the background to an image
 
-    width = 1000
+    width = 1366
     border = 950
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
 
@@ -185,11 +184,11 @@ Lz_neptune = Coordinates(reg_pos, 8)[2]
 
 # 3D solar system figure
 
-fig = plt.figure(figsize=(300, 200), dpi=115)
+fig = plt.figure(figsize=(30, 36), dpi=115)
 plt.tight_layout()
 
 figManager = plt.get_current_fig_manager()
-figManager.window.showMaximized()  # maximize window automatically
+figManager.window.state('zoomed')  # maximize window automatically
 
 ax = fig.add_subplot(111, projection='3d')  # 3D plot
 
