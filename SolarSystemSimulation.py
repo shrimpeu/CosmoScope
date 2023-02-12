@@ -2,7 +2,7 @@ from matplotlib import animation
 
 from SimulationParameters import *
 from PropagationModule import *
-
+import numpy as np
 
 
 def animate_func(i):
@@ -11,10 +11,14 @@ def animate_func(i):
     # PROCEDURE
     # Animating the plot for real time results.
     #--------------------------------------------------------------------------------------
-    ax.set_facecolor('black')            # Sets the color of imaginary square to black
+    #ax.set_facecolor('black')            # Sets the color of imaginary square to black
 
     ax.clear()
     ax.set_axis_off()
+
+    width = 1366
+    border = 50
+    ax.set_position([border / width, 0, (width - border * 2) / width, 1])
 
     ax.scatter(0,0,0, s=150, c="yellow")
     ax.text(0,0,0,"Sun",color="white")
@@ -186,13 +190,13 @@ Lz_neptune = Coordinates(reg_pos,8)[2]
 
 #----------------------- 3D solar system figure
 
-fig = plt.figure(figsize=(38, 36), dpi=250)
+fig = plt.figure(figsize=(10, 6), dpi=200)
 plt.tight_layout()
 
 figManager = plt.get_current_fig_manager()
-figManager.window.state('zoomed')          # maximize window automatically
+figManager.window.state('zoomed')      # maximize window automatically
 
-ax = plt.axes(projection='3d')              # 3D plot
+ax = fig.add_subplot(111, projection='3d')            # 3D plot
 
 
 plt.rcParams['axes.facecolor'] = 'black'    # axes in black
@@ -203,7 +207,9 @@ ax.view_init(elev=-89, azim=24)             # initial orientation of simulation
 
 timescale = np.arange(t_start, t_end+2*dt, dt) # generating time scale
 
-simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)))
+simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)), blit=False)
+
+fig.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9)
 
 
 plt.show()
