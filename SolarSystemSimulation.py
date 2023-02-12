@@ -1,9 +1,12 @@
 from matplotlib import animation
+import matplotlib.image as mpimg
+from mpl_toolkits.mplot3d import Axes3D
 
 from SimulationParameters import *
 from PropagationModule import *
 import numpy as np
 
+    # img = mpimg.imread("F:\College\Python\pythonProject - converter\CosmoScope-main\space2.jpg") // For image background
 
 def animate_func(i):
 
@@ -15,9 +18,11 @@ def animate_func(i):
 
     ax.clear()
     ax.set_axis_off()
-
-    width = 1366
-    border = 50
+    
+    # ax.imshow(img, aspect = 'auto')         # sets the background to an image
+        
+    width = 1300
+    border = 1250
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
 
     ax.scatter(0,0,0, s=150, c="yellow")
@@ -190,7 +195,7 @@ Lz_neptune = Coordinates(reg_pos,8)[2]
 
 #----------------------- 3D solar system figure
 
-fig = plt.figure(figsize=(10, 6), dpi=200)
+fig = plt.figure(figsize=(300, 200), dpi=115)
 plt.tight_layout()
 
 figManager = plt.get_current_fig_manager()
@@ -209,7 +214,7 @@ timescale = np.arange(t_start, t_end+2*dt, dt) # generating time scale
 
 simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)), blit=False)
 
-fig.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9)
+fig.subplots_adjust(left=5, right=10, bottom=5, top=10)
 
 
 plt.show()
