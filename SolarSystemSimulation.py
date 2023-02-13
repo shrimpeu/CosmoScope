@@ -32,36 +32,36 @@ def animate_func(i):
 
         ax.plot(Lx_mercury[:i + 1], Ly_mercury[:i + 1], Lz_mercury[:i + 1], c="#ffffff", linewidth=1.2)
         ax.scatter(Lx_mercury[i], Ly_mercury[i], Lz_mercury[i], s=0.38, c='#808080', marker='o')
-        ax.text(5 + Lx_mercury[i], 5 + Ly_mercury[i], 5 + Lz_mercury[i], "Mercury", color="white")
+        ax.text(5 + Lx_mercury[i], 5 + Ly_mercury[i], 5 + Lz_mercury[i], "Mercury", color="white", size=5)
 
         ax.plot(Lx_venus[:i + 1], Ly_venus[:i + 1], Lz_venus[:i + 1], c="#E9ECAA", linewidth=1.2)
         ax.scatter(Lx_venus[i], Ly_venus[i], Lz_venus[i], s=10, c='#E9CA09', marker='o')
-        ax.text(5 + Lx_venus[i], 5 + Ly_venus[i], 5 + Lz_venus[i], "Venus", color="white")
+        ax.text(5 + Lx_venus[i], 5 + Ly_venus[i], 5 + Lz_venus[i], "Venus", color="white", size=5)
 
         ax.plot(Lx_earth[:i + 1], Ly_earth[:i + 1], Lz_earth[:i + 1], c="#E9ECAA", linewidth=1.2)
         ax.scatter(Lx_earth[i], Ly_earth[i], Lz_earth[i], s=10.72, c='#0000ff', marker='o')
-        ax.text(5 + Lx_earth[i], 5 + Ly_earth[i], 5 + Lz_earth[i], "Earth", color="white")
+        ax.text(5 + Lx_earth[i], 5 + Ly_earth[i], 5 + Lz_earth[i], "Earth", color="white", size=5)
 
         ax.plot(Lx_mars[:i + 1], Ly_mars[:i + 1], Lz_mars[:i + 1], c="#E9ECAA", linewidth=1.2)
         ax.scatter(Lx_mars[i], Ly_mars[i], Lz_mars[i], s=10.5, c='#ff0000', marker='o')
-        ax.text(5 + Lx_mars[i], 5 + Ly_mars[i], 5 + Lz_mars[i], "Mars", color="white")
+        ax.text(5 + Lx_mars[i], 5 + Ly_mars[i], 5 + Lz_mars[i], "Mars", color="white", size=5)
 
         ax.plot(Lx_jupiter[:i + 1], Ly_jupiter[:i + 1], Lz_jupiter[:i + 1], c="#EBC0B7", linewidth=1.2)
         ax.scatter(Lx_jupiter[i], Ly_jupiter[i], Lz_jupiter[i], s=70, c='#B3280A', marker='o')
-        ax.text(5 + Lx_jupiter[i], 5 + Ly_jupiter[i], 5 + Lz_jupiter[i], "Jupiter", color="white")
+        ax.text(5 + Lx_jupiter[i], 5 + Ly_jupiter[i], 5 + Lz_jupiter[i], "Jupiter", color="white", size=5)
         # labels["Jupiter"].set_visible(False)
 
         ax.plot(Lx_saturn[:i + 1], Ly_saturn[:i + 1], Lz_saturn[:i + 1], c="#BDB9AD", linewidth=1.2)
         ax.scatter(Lx_saturn[i], Ly_saturn[i], Lz_saturn[i], s=55.4, c='#7C5029', marker='o')
-        ax.text(5 + Lx_saturn[i], 5 + Ly_saturn[i], 5 + Lz_saturn[i], "Saturn", color="white")
+        ax.text(5 + Lx_saturn[i], 5 + Ly_saturn[i], 5 + Lz_saturn[i], "Saturn", color="white", size=5)
 
         ax.plot(Lx_uranus[:i + 1], Ly_uranus[:i + 1], Lz_uranus[:i + 1], c="#A2D2DC", linewidth=1.2)
         ax.scatter(Lx_uranus[i], Ly_uranus[i], Lz_uranus[i], s=30, c='#088F8F', marker='o')
-        ax.text(5 + Lx_uranus[i], 5 + Ly_uranus[i], 5 + Lz_uranus[i], "Uranus", color="white")
+        ax.text(5 + Lx_uranus[i], 5 + Ly_uranus[i], 5 + Lz_uranus[i], "Uranus", color="white", size=5)
 
         ax.plot(Lx_neptune[:i + 1], Ly_neptune[:i + 1], Lz_neptune[:i + 1], c="#BCE9BA", linewidth=1.2)
         ax.scatter(Lx_neptune[i], Ly_neptune[i], Lz_neptune[i], s=30, c='#118A0B', marker='o')
-        ax.text(5 + Lx_neptune[i], 5 + Ly_neptune[i], 5 + Lz_neptune[i], "Neptune", color="white")
+        ax.text(5 + Lx_neptune[i], 5 + Ly_neptune[i], 5 + Lz_neptune[i], "Neptune", color="white", size=5)
 
         ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc = 'center')
 
@@ -209,7 +209,7 @@ plt.tight_layout()
 
 
 figManager = plt.get_current_fig_manager()
-figManager.window.state('zoomed')  # maximize window automatically
+# figManager.window.state('zoomed')  # maximize window automatically
 
 
 plt.rcParams['axes.facecolor'] = 'black'  # axes in black
