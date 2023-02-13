@@ -1,10 +1,12 @@
 from matplotlib import animation
-
 from SimulationParameters import *
 from PropagationModule import *
 import numpy as np
 
+# Load the image
+img = plt.imread('space_bg.png')
 
+# Define a function to animate the plot
 def animate_func(i):
     fig.canvas.mpl_connect('scroll_event', handle_scroll)  # connects 'scroll_event' and handle_scroll function
     # --------------------------------------------------------------------------------------
@@ -12,21 +14,19 @@ def animate_func(i):
     # Animating the plot for real time results.
     # --------------------------------------------------------------------------------------
 
-    ax.set_facecolor('black')             # Sets the color of imaginary square to black
+    ax.set_facecolor('none')             # Sets the color of imaginary square to black
 
     ax.clear()
     ax.set_axis_off()
 
-    width = 900
-    border = 950
+    width = 1366
+    border = 1500
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
+
 
     ax.scatter(0, 0, 0, s=150, c="yellow")
     ax.text(0, 0, 0, "Sun", color="white")
 
-    # ax.set_xlim3d([-Lx_neptune[-1], Lx_neptune[-1]])
-    # ax.set_ylim3d([-Ly_neptune[-1], Ly_neptune[-1]])
-    # ax.set_zlim3d([-Lz_neptune[-1], Lz_neptune[-1]])
 
     if timescale[i] <= t_end:
 
@@ -49,6 +49,7 @@ def animate_func(i):
         ax.plot(Lx_jupiter[:i + 1], Ly_jupiter[:i + 1], Lz_jupiter[:i + 1], c="#EBC0B7", linewidth=1.2)
         ax.scatter(Lx_jupiter[i], Ly_jupiter[i], Lz_jupiter[i], s=70, c='#B3280A', marker='o')
         ax.text(5 + Lx_jupiter[i], 5 + Ly_jupiter[i], 5 + Lz_jupiter[i], "Jupiter", color="white")
+        # labels["Jupiter"].set_visible(False)
 
         ax.plot(Lx_saturn[:i + 1], Ly_saturn[:i + 1], Lz_saturn[:i + 1], c="#BDB9AD", linewidth=1.2)
         ax.scatter(Lx_saturn[i], Ly_saturn[i], Lz_saturn[i], s=55.4, c='#7C5029', marker='o')
@@ -62,7 +63,7 @@ def animate_func(i):
         ax.scatter(Lx_neptune[i], Ly_neptune[i], Lz_neptune[i], s=30, c='#118A0B', marker='o')
         ax.text(5 + Lx_neptune[i], 5 + Ly_neptune[i], 5 + Lz_neptune[i], "Neptune", color="white")
 
-        ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3))
+        ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc = 'center')
 
     else:
 
@@ -199,9 +200,10 @@ Lz_neptune = Coordinates(reg_pos, 8)[2]
 
 # 3D solar system figure
 
-fig = plt.figure(figsize=(30, 36), dpi=150)
+# Adds a bg image
+fig = plt.figure("Solar System simulation", dpi=150)
 ax = fig.add_subplot(111, projection='3d')  # 3D plot
-
+fig.figimage(img, alpha=0.4)
 
 plt.tight_layout()
 
@@ -219,8 +221,6 @@ ax.view_init(elev=-89, azim=24)  # initial orientation of simulation
 timescale = np.arange(t_start, t_end + 2 * dt, dt)  # generating time scale
 
 simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)), blit=False)
-
-fig.subplots_adjust(left=5, right=10, bottom=5, top=10)
 
 
 plt.show()
