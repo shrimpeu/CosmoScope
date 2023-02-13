@@ -38,5 +38,3 @@ a_i = G * sum ( (r_j - r_i) / abs(r_j - r_i)^3 )
 - **Plotting** the results through time from the beginning of the simumation to the end with a given time step. Matplotlib and the [animation module](https://matplotlib.org/stable/api/animation_api.html) is used. 
 
 
-
-_Copyright (C) Marwa Kadhem_
