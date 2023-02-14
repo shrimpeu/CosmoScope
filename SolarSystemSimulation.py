@@ -4,6 +4,7 @@ from SimulationParameters import *
 from PropagationModule import *
 import numpy as np
 import ast
+from mpl_toolkits.mplot3d import Axes3D
 
 # Load the image
 img = mpimg.imread('space_bg2.png')
@@ -21,8 +22,8 @@ def animate_func(i):
     ax.clear()
     ax.set_axis_off()
 
-    width = 1366
-    border = 1500
+    width = 950
+    border = 1366
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
 
 
@@ -67,6 +68,21 @@ def animate_func(i):
 
         ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc = 'center')
 
+        x_data = Coordinates(reg_pos, 4)[0]
+        y_data = Coordinates(reg_pos, 4)[1]
+        z_data = Coordinates(reg_pos, 4)[2]
+
+        xmin = numpy.min(x_data)
+        xmax = numpy.max(x_data)
+        ymin = numpy.min(y_data)
+        ymax = numpy.max(y_data)
+        zmin = numpy.min(z_data)
+        zmax = numpy.max(z_data)
+
+        ax.set_xlim3d(xmin, xmax)
+        ax.set_ylim3d(ymin, ymax)
+        ax.set_zlim3d(zmin, zmax)
+
     else:
 
         simulation.event_source.stop()
@@ -74,19 +90,24 @@ def animate_func(i):
 
 # Zoom function
 def handle_scroll(event):
-    axtemp = event.inaxes
-    if axtemp is not None:
-        if event.button == 'up':
-            # Zoom in
-            axtemp.set_xlim(axtemp.get_xlim()[0]*0.9, axtemp.get_xlim()[1]*0.9)
-            axtemp.set_ylim(axtemp.get_ylim()[0]*0.9, axtemp.get_ylim()[1]*0.9)
-            axtemp.set_zlim(axtemp.get_zlim()[0]*0.9, axtemp.get_zlim()[1]*0.9)
-        elif event.button == 'down':
-            # Zoom out
-            axtemp.set_xlim(axtemp.get_xlim()[0]*1.1, axtemp.get_xlim()[1]*1.1)
-            axtemp.set_ylim(axtemp.get_ylim()[0]*1.1, axtemp.get_ylim()[1]*1.1)
-            axtemp.set_zlim(axtemp.get_zlim()[0]*1.1, axtemp.get_zlim()[1]*1.1)
-        plt.draw()
+    # Get the current limits of the axes
+    xlim = ax.get_xlim3d()
+    ylim = ax.get_ylim3d()
+    zlim = ax.get_zlim3d()
+
+    # Scale the limits based on the direction and intensity of the scroll event
+    if event.button == 'up':
+        scale_factor = 1/1.5
+    else:
+        scale_factor = 1.5
+    new_xlim = (xlim[1]-xlim[0])/2*scale_factor + np.mean(xlim)
+    new_ylim = (ylim[1]-ylim[0])/2*scale_factor + np.mean(ylim)
+    new_zlim = (zlim[1]-zlim[0])/2*scale_factor + np.mean(zlim)
+
+    # Set the new limits of the axes
+    ax.set_xlim3d(new_xlim[0], new_xlim[1])
+    ax.set_ylim3d(new_ylim[0], new_ylim[1])
+    ax.set_zlim3d(new_zlim[0], new_zlim[1])
 
 
 
