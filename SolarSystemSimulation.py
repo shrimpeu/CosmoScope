@@ -1,10 +1,12 @@
 from matplotlib import animation
+import matplotlib.image as mpimg
 from SimulationParameters import *
 from PropagationModule import *
 import numpy as np
+import ast
 
 # Load the image
-img = plt.imread('space_bg.png')
+img = mpimg.imread('space_bg2.png')
 
 # Define a function to animate the plot
 def animate_func(i):
@@ -203,14 +205,16 @@ Lz_neptune = Coordinates(reg_pos, 8)[2]
 # Adds a bg image
 fig = plt.figure("Solar System simulation", dpi=150)
 ax = fig.add_subplot(111, projection='3d')  # 3D plot
-fig.figimage(img, alpha=0.4)
+fig.figimage(img, alpha=0.3, resize='auto')
 
-plt.tight_layout()
-
+ax.set_facecolor('none')
+ax.set_axis_off()
 
 figManager = plt.get_current_fig_manager()
-# figManager.window.state('zoomed')  # maximize window automatically
+# Get the size of the image
+img_size = img.shape[:2][::-1]  # (height, width)
 
+figManager.window.state('zoomed')
 
 plt.rcParams['axes.facecolor'] = 'black'  # axes in black
 plt.rcParams['text.color'] = 'white'  # texts in white
@@ -222,5 +226,6 @@ timescale = np.arange(t_start, t_end + 2 * dt, dt)  # generating time scale
 
 simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)), blit=False)
 
+plt.tight_layout()
 
 plt.show()
