@@ -7,11 +7,12 @@ import ast
 from mpl_toolkits.mplot3d import Axes3D
 
 # Load the image
-img = mpimg.imread('space_bg2.png')
+img = mpimg.imread('space2.jpg')
+
 
 # Define a function to animate the plot
 def animate_func(i):
-    fig.canvas.mpl_connect('scroll_event', handle_scroll)  # connects 'scroll_event' and handle_scroll function
+    # fig.canvas.mpl_connect('scroll_event', handle_scroll)  # connects 'scroll_event' and handle_scroll function
     # --------------------------------------------------------------------------------------
     # PROCEDURE
     # Animating the plot for real time results.
@@ -22,14 +23,12 @@ def animate_func(i):
     ax.clear()
     ax.set_axis_off()
 
-    width = 950
-    border = 1366
+    width = 1000
+    border = 1500
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
-
 
     ax.scatter(0, 0, 0, s=150, c="yellow")
     ax.text(0, 0, 0, "Sun", color="white")
-
 
     if timescale[i] <= t_end:
 
@@ -66,7 +65,7 @@ def animate_func(i):
         ax.scatter(Lx_neptune[i], Ly_neptune[i], Lz_neptune[i], s=30, c='#118A0B', marker='o')
         ax.text(5 + Lx_neptune[i], 5 + Ly_neptune[i], 5 + Lz_neptune[i], "Neptune", color="white", size=5)
 
-        ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc = 'center')
+        ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc='center')
 
         x_data = Coordinates(reg_pos, 4)[0]
         y_data = Coordinates(reg_pos, 4)[1]
@@ -74,8 +73,10 @@ def animate_func(i):
 
         xmin = numpy.min(x_data)
         xmax = numpy.max(x_data)
+
         ymin = numpy.min(y_data)
         ymax = numpy.max(y_data)
+
         zmin = numpy.min(z_data)
         zmax = numpy.max(z_data)
 
@@ -88,27 +89,17 @@ def animate_func(i):
         simulation.event_source.stop()
         print("Simulation ended successfully.")
 
+
 # Zoom function
-def handle_scroll(event):
-    # Get the current limits of the axes
-    xlim = ax.get_xlim3d()
-    ylim = ax.get_ylim3d()
-    zlim = ax.get_zlim3d()
-
-    # Scale the limits based on the direction and intensity of the scroll event
-    if event.button == 'up':
-        scale_factor = 1/1.5
-    else:
-        scale_factor = 1.5
-    new_xlim = (xlim[1]-xlim[0])/2*scale_factor + np.mean(xlim)
-    new_ylim = (ylim[1]-ylim[0])/2*scale_factor + np.mean(ylim)
-    new_zlim = (zlim[1]-zlim[0])/2*scale_factor + np.mean(zlim)
-
-    # Set the new limits of the axes
-    ax.set_xlim3d(new_xlim[0], new_xlim[1])
-    ax.set_ylim3d(new_ylim[0], new_ylim[1])
-    ax.set_zlim3d(new_zlim[0], new_zlim[1])
-
+def on_scroll(event):
+    ax = event.inaxes
+    if ax is not None:
+        if event.button == 'up':
+            # Zoom in
+            ax.dist = max(ax.dist - 1, 0)
+        elif event.button == 'down':
+            # Zoom out
+            ax.dist += 1
 
 
 # ==================================================================
@@ -235,13 +226,14 @@ figManager = plt.get_current_fig_manager()
 # Get the size of the image
 img_size = img.shape[:2][::-1]  # (height, width)
 
-figManager.window.state('zoomed')
+figManager.window.showMaximized()
 
 plt.rcParams['axes.facecolor'] = 'black'  # axes in black
 plt.rcParams['text.color'] = 'white'  # texts in white
 fig.set_facecolor('black')  # black background
 
 ax.view_init(elev=-80, azim=-50)  # initial orientation of simulation
+fig.canvas.mpl_connect('scroll_event', on_scroll)
 
 timescale = np.arange(t_start, t_end + 2 * dt, dt)  # generating time scale
 
