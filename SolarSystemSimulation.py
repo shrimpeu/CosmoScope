@@ -216,7 +216,7 @@ plt.rcParams['axes.facecolor'] = 'black'  # axes in black
 plt.rcParams['text.color'] = 'white'  # texts in white
 fig.set_facecolor('black')  # black background
 
-ax.view_init(elev=-89, azim=24)  # initial orientation of simulation
+ax.view_init(elev=-80, azim=-50)  # initial orientation of simulation
 
 timescale = np.arange(t_start, t_end + 2 * dt, dt)  # generating time scale
 
