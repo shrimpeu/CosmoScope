@@ -7,7 +7,7 @@ import ast
 from mpl_toolkits.mplot3d import Axes3D
 
 # Load the image
-img = mpimg.imread('space2.jpg')
+img = mpimg.imread(r'C:\Users\Christian\CosmoScope\space_bg2.png')
 
 
 # Define a function to animate the plot
@@ -30,10 +30,11 @@ def animate_func(i):
     ax.scatter(0, 0, 0, s=150, c="yellow")
     ax.text(0, 0, 0, "Sun", color="white")
 
+
     if timescale[i] <= t_end:
 
         ax.plot(Lx_mercury[:i + 1], Ly_mercury[:i + 1], Lz_mercury[:i + 1], c="#ffffff", linewidth=1.2)
-        ax.scatter(Lx_mercury[i], Ly_mercury[i], Lz_mercury[i], s=0.38, c='#808080', marker='o')
+        ax.scatter(Lx_mercury[i], Ly_mercury[i], Lz_mercury[i], s=1.38, c='#808080', marker='o')
         ax.text(5 + Lx_mercury[i], 5 + Ly_mercury[i], 5 + Lz_mercury[i], "Mercury", color="white", size=5)
 
         ax.plot(Lx_venus[:i + 1], Ly_venus[:i + 1], Lz_venus[:i + 1], c="#E9ECAA", linewidth=1.2)
@@ -65,7 +66,13 @@ def animate_func(i):
         ax.scatter(Lx_neptune[i], Ly_neptune[i], Lz_neptune[i], s=30, c='#118A0B', marker='o')
         ax.text(5 + Lx_neptune[i], 5 + Ly_neptune[i], 5 + Lz_neptune[i], "Neptune", color="white", size=5)
 
+        ax.plot(Lx_pluto[:i + 1], Ly_pluto[:i + 1], Lz_pluto[:i + 1], c="#FFC0CB", linewidth=1.2)
+        ax.scatter(Lx_pluto[i], Ly_pluto[i], Lz_pluto[i], s=0.38, c='#A52A2A', marker='o')
+        ax.text(5 + Lx_pluto[i], 5 + Ly_pluto[i], 5 + Lz_pluto[i], "Pluto", color="white", size=5)
+
         ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc='center')
+
+        # Adjustes the distance of planets to the sun
 
         x_data = Coordinates(reg_pos, 4)[0]
         y_data = Coordinates(reg_pos, 4)[1]
@@ -90,17 +97,17 @@ def animate_func(i):
         print("Simulation ended successfully.")
 
 
+
 # Zoom function
 def on_scroll(event):
     ax = event.inaxes
     if ax is not None:
         if event.button == 'up':
             # Zoom in
-            ax.dist = max(ax.dist - 1, 0)
+            ax.dist = max(ax.dist - 10, 0)
         elif event.button == 'down':
             # Zoom out
-            ax.dist += 1
-
+            ax.dist += 10
 
 # ==================================================================
 #                               MAIN
@@ -162,15 +169,21 @@ pos_neptune = Ephemeris(t_start, 'NEPTUNE BARYCENTER')[0]
 vel_neptune = Ephemeris(t_start, 'NEPTUNE BARYCENTER')[1]
 m_neptune = 102e24
 
+# Pluto
+pluto_id = 9
+pos_pluto = Ephemeris(t_start, 'PlUTO BARYCENTER')[0]
+vel_pluto = Ephemeris(t_start, 'PLUTO BARYCENTER')[1]
+m_pluto = 0.322e24
+
 # Initial conditions mass, positions and velocities with ephemeris
 
-mass = np.array([m_sun, m_mercury, m_mars, m_earth, m_venus, m_jupiter, m_saturn, m_uranus, m_neptune])
+mass = np.array([m_sun, m_mercury, m_mars, m_earth, m_venus, m_jupiter, m_saturn, m_uranus, m_neptune, m_pluto])
 
 pos_init = np.concatenate(
-    (pos_sun, pos_mercury, pos_mars, pos_earth, pos_venus, pos_jupiter, pos_saturn, pos_uranus, pos_neptune), axis=0)
+    (pos_sun, pos_mercury, pos_mars, pos_earth, pos_venus, pos_jupiter, pos_saturn, pos_uranus, pos_neptune, pos_pluto), axis=0)
 
 vel_init = np.concatenate(
-    (vel_sun, vel_mercury, vel_mars, vel_earth, vel_venus, vel_jupiter, vel_saturn, vel_uranus, vel_neptune), axis=0)
+    (vel_sun, vel_mercury, vel_mars, vel_earth, vel_venus, vel_jupiter, vel_saturn, vel_uranus, vel_neptune, vel_pluto), axis=0)
 
 # Integration using the leapfrog integration (Störmer-Verlet method)
 
@@ -210,13 +223,18 @@ Lx_neptune = Coordinates(reg_pos, 8)[0]
 Ly_neptune = Coordinates(reg_pos, 8)[1]
 Lz_neptune = Coordinates(reg_pos, 8)[2]
 
+Lx_pluto = Coordinates(reg_pos, 9)[0]
+Ly_pluto = Coordinates(reg_pos, 9)[1]
+Lz_pluto = Coordinates(reg_pos, 9)[2]
+
 # Animation show the evolution of bodies in the Solar System
 
 # 3D solar system figure
 
+
 # Adds a bg image
 fig = plt.figure("Solar System simulation", dpi=150)
-ax = fig.add_subplot(111, projection='3d')  # 3D plot
+ax = fig.add_subplot(222, projection='3d')  # 3D plot
 fig.figimage(img, alpha=0.3, resize='auto')
 
 ax.set_facecolor('none')
@@ -226,7 +244,7 @@ figManager = plt.get_current_fig_manager()
 # Get the size of the image
 img_size = img.shape[:2][::-1]  # (height, width)
 
-figManager.window.showMaximized()
+figManager.window.state('zoomed')
 
 plt.rcParams['axes.facecolor'] = 'black'  # axes in black
 plt.rcParams['text.color'] = 'white'  # texts in white
