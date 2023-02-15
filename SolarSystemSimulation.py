@@ -31,10 +31,11 @@ def animate_func(i):
     ax.text(0, 0, 0, "Sun", color="white")
 
 
-    if timescale[i] <= t_end:
 
-        time_str = 'TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 0)
-        ax.text(2, 2, 2, time_str, transform=ax.transAxes, ha='right', va='top', fontsize=10)
+    if timescale[i] <= t_end:
+        fig.suptitle('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), fontsize=16)
+        # time_str = 'TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 0)
+        # ax.text(2, 2, 2, time_str, transform=ax.transAxes, ha='right', va='top', fontsize=10)
 
         ax.plot(Lx_mercury[:i + 1], Ly_mercury[:i + 1], Lz_mercury[:i + 1], c="#ffffff", linewidth=1.2)
         ax.scatter(Lx_mercury[i], Ly_mercury[i], Lz_mercury[i], s=1.38, c='#808080', marker='o')
@@ -178,6 +179,8 @@ pos_pluto = Ephemeris(t_start, 'PlUTO BARYCENTER')[0]
 vel_pluto = Ephemeris(t_start, 'PLUTO BARYCENTER')[1]
 m_pluto = 0.322e24
 
+
+
 # Initial conditions mass, positions and velocities with ephemeris
 
 mass = np.array([m_sun, m_mercury, m_mars, m_earth, m_venus, m_jupiter, m_saturn, m_uranus, m_neptune, m_pluto])
@@ -229,6 +232,7 @@ Lz_neptune = Coordinates(reg_pos, 8)[2]
 Lx_pluto = Coordinates(reg_pos, 9)[0]
 Ly_pluto = Coordinates(reg_pos, 9)[1]
 Lz_pluto = Coordinates(reg_pos, 9)[2]
+
 
 # Animation show the evolution of bodies in the Solar System
 
