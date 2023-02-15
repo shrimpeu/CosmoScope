@@ -33,6 +33,9 @@ def animate_func(i):
 
     if timescale[i] <= t_end:
 
+        time_str = 'TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 0)
+        ax.text(2, 2, 2, time_str, transform=ax.transAxes, ha='right', va='top', fontsize=10)
+
         ax.plot(Lx_mercury[:i + 1], Ly_mercury[:i + 1], Lz_mercury[:i + 1], c="#ffffff", linewidth=1.2)
         ax.scatter(Lx_mercury[i], Ly_mercury[i], Lz_mercury[i], s=1.38, c='#808080', marker='o')
         ax.text(5 + Lx_mercury[i], 5 + Ly_mercury[i], 5 + Lz_mercury[i], "Mercury", color="white", size=5)
@@ -70,7 +73,7 @@ def animate_func(i):
         ax.scatter(Lx_pluto[i], Ly_pluto[i], Lz_pluto[i], s=0.38, c='#A52A2A', marker='o')
         ax.text(5 + Lx_pluto[i], 5 + Ly_pluto[i], 5 + Lz_pluto[i], "Pluto", color="white", size=5)
 
-        ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc='center')
+        # ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc='center')
 
         # Adjustes the distance of planets to the sun
 
@@ -241,9 +244,6 @@ ax.set_facecolor('none')
 ax.set_axis_off()
 
 figManager = plt.get_current_fig_manager()
-# Get the size of the image
-img_size = img.shape[:2][::-1]  # (height, width)
-
 figManager.window.state('zoomed')
 
 plt.rcParams['axes.facecolor'] = 'black'  # axes in black
