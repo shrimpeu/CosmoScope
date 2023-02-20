@@ -48,8 +48,8 @@ def animate_func(i):
         ax.scatter(Lx_mars[i], Ly_mars[i], Lz_mars[i], s=10.5, c='#ff0000', marker='o')
         ax.text(5 + Lx_mars[i], 5 + Ly_mars[i], 5 + Lz_mars[i], "Mars", color="white", size=5)
 
-        ax.plot(Lx_jupiter[:i + 1], Ly_jupiter[:i + 1], Lz_jupiter[:i + 1], c="#EBC0B7", linewidth=1.2)
-        ax.scatter(Lx_jupiter[i], Ly_jupiter[i], Lz_jupiter[i], s=70, c='#B3280A', marker='o')
+        ax.plot(Lx_jupiter[:i + 1], Ly_jupiter[:i + 1], Lz_jupiter[:i + 1], c="#d8ca9d", linewidth=1.2)
+        ax.scatter(Lx_jupiter[i], Ly_jupiter[i], Lz_jupiter[i], s=70, c='#c99039', marker='o')
         ax.text(5 + Lx_jupiter[i], 5 + Ly_jupiter[i], 5 + Lz_jupiter[i], "Jupiter", color="white", size=5)
 
         ax.plot(Lx_saturn[:i + 1], Ly_saturn[:i + 1], Lz_saturn[:i + 1], c="#BDB9AD", linewidth=1.2)
