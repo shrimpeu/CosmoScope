@@ -56,16 +56,16 @@ def animate_func(i):
         ax.scatter(Lx_saturn[i], Ly_saturn[i], Lz_saturn[i], s=55.4, c='#A49B72', marker='o')
         ax.text(5 + Lx_saturn[i], 5 + Ly_saturn[i], 5 + Lz_saturn[i], "Saturn", color="white", size=5)
 
-        ax.plot(Lx_uranus[:i + 1], Ly_uranus[:i + 1], Lz_uranus[:i + 1], c="#A2D2DC", linewidth=1.2)
-        ax.scatter(Lx_uranus[i], Ly_uranus[i], Lz_uranus[i], s=30, c='#088F8F', marker='o')
+        ax.plot(Lx_uranus[:i + 1], Ly_uranus[:i + 1], Lz_uranus[:i + 1], c="#BBE1E4", linewidth=1.2)
+        ax.scatter(Lx_uranus[i], Ly_uranus[i], Lz_uranus[i], s=30, c='#93B8BE', marker='o')
         ax.text(5 + Lx_uranus[i], 5 + Ly_uranus[i], 5 + Lz_uranus[i], "Uranus", color="white", size=5)
 
-        ax.plot(Lx_neptune[:i + 1], Ly_neptune[:i + 1], Lz_neptune[:i + 1], c="#BCE9BA", linewidth=1.2)
-        ax.scatter(Lx_neptune[i], Ly_neptune[i], Lz_neptune[i], s=30, c='#118A0B', marker='o')
+        ax.plot(Lx_neptune[:i + 1], Ly_neptune[:i + 1], Lz_neptune[:i + 1], c="#6081FF", linewidth=1.2)
+        ax.scatter(Lx_neptune[i], Ly_neptune[i], Lz_neptune[i], s=30, c='#3E54E8', marker='o')
         ax.text(5 + Lx_neptune[i], 5 + Ly_neptune[i], 5 + Lz_neptune[i], "Neptune", color="white", size=5)
 
-        ax.plot(Lx_pluto[:i + 1], Ly_pluto[:i + 1], Lz_pluto[:i + 1], c="#FFC0CB", linewidth=1.2)
-        ax.scatter(Lx_pluto[i], Ly_pluto[i], Lz_pluto[i], s=0.38, c='#A52A2A', marker='o')
+        ax.plot(Lx_pluto[:i + 1], Ly_pluto[:i + 1], Lz_pluto[:i + 1], c="#ddc4af", linewidth=1.2)
+        ax.scatter(Lx_pluto[i], Ly_pluto[i], Lz_pluto[i], s=0.38, c='#968570', marker='o')
         ax.text(5 + Lx_pluto[i], 5 + Ly_pluto[i], 5 + Lz_pluto[i], "Pluto", color="white", size=5)
 
         # Adjustes the distance of planets to the sun
