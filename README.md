@@ -33,5 +33,5 @@ a_i = G * sum ( (r_j - r_i) / abs(r_j - r_i)^3 )
 
 ## Simulation
 
-![This is an image](readmecosmoscope.png)
-
+![This is an image](Simulation1.png)
+![This is an image](Simulation2.png)
