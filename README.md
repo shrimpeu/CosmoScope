@@ -1,4 +1,4 @@
-# Solar System 3D simulation
+# CosmoScope
 
 ![This is an image](solarsys_im.jpg)
 
