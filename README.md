@@ -2,10 +2,10 @@
 
 ![This is an image](readmecosmoscope.png)
 
-**General description**: 3D simulation of the Solar System by propagating the orbit of each celestial body, in addition to the interplanetary trajectory of Pioneer 10. The initial  conditions used to solve the n-body problem are generated using the ephemeris imported from the SPICE files (SpiceyPy library). 
+**General description**: 3D simulation of the Solar System by propagating the orbit of each celestial body. The initial  conditions used to solve the n-body problem are generated using the ephemeris imported from the SPICE files (SpiceyPy library). 
 
 The program is structured in 3 files:
-- **Module (PropagationModule.py)** which contains all the functions needed to solve the n-body problem applied on the Solar System. This includes getting the initial conditions from NASA SPICE (Spacecraft, Planet, Instrument, C-matrix, Events ephemeris) files through the spiceypy SPK kernel. 
+- **Module (PropagationModule.py)** which contains all the functions needed to solve the n-body problem applied on the Solar System. This includes getting the initial conditions from NASA SPICE (Planet, Instrument, Events ephemeris) files through the spiceypy SPK kernel. 
 - **Parameters (SimulationParameters.py)** PLEASE ENTER YOUR PARAMETERS HERE!
 - **Main (SolarSystemSimulation.py)** which contains the main program including the animation of the plots using Matplotlib. PLEASE RUN THIS CODE!
 
