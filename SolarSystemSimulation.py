@@ -10,7 +10,6 @@ img = mpimg.imread(r'C:\Users\Christian\CosmoScope\space_bg2.png')
 
 # Define a function to animate the plot
 def animate_func(i):
-    # fig.canvas.mpl_connect('scroll_event', handle_scroll)  # connects 'scroll_event' and handle_scroll function
     # --------------------------------------------------------------------------------------
     # PROCEDURE
     # Animating the plot for real time results.
@@ -29,41 +28,51 @@ def animate_func(i):
     if timescale[i] <= t_end:
         fig.suptitle('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), fontsize=16)
 
+        # Plot the Sun
         ax.scatter(0, 0, 0, s=150, c="yellow")
         ax.text(0, 0, 0, "Sun", color="white")
 
+        # Plot Mercury
         ax.plot(Lx_mercury[:i + 1], Ly_mercury[:i + 1], Lz_mercury[:i + 1], c="#ffffff", linewidth=1.2)
         ax.scatter(Lx_mercury[i], Ly_mercury[i], Lz_mercury[i], s=1.38, c='#808080', marker='o')
         ax.text(5 + Lx_mercury[i], 5 + Ly_mercury[i], 5 + Lz_mercury[i], "Mercury", color="white", size=5)
 
+        # Plot Venus
         ax.plot(Lx_venus[:i + 1], Ly_venus[:i + 1], Lz_venus[:i + 1], c="#E9ECAA", linewidth=1.2)
         ax.scatter(Lx_venus[i], Ly_venus[i], Lz_venus[i], s=10, c='#E9CA09', marker='o')
         ax.text(5 + Lx_venus[i], 5 + Ly_venus[i], 5 + Lz_venus[i], "Venus", color="white", size=5)
 
+        # Plot Earth
         ax.plot(Lx_earth[:i + 1], Ly_earth[:i + 1], Lz_earth[:i + 1], c="#00FFFF", linewidth=1.2)
         ax.scatter(Lx_earth[i], Ly_earth[i], Lz_earth[i], s=10.72, c='#0000ff', marker='o')
         ax.text(5 + Lx_earth[i], 5 + Ly_earth[i], 5 + Lz_earth[i], "Earth", color="white", size=5)
 
+        # Plot Mars
         ax.plot(Lx_mars[:i + 1], Ly_mars[:i + 1], Lz_mars[:i + 1], c="#FFC0CB", linewidth=1.2)
         ax.scatter(Lx_mars[i], Ly_mars[i], Lz_mars[i], s=10.5, c='#ff0000', marker='o')
         ax.text(5 + Lx_mars[i], 5 + Ly_mars[i], 5 + Lz_mars[i], "Mars", color="white", size=5)
 
+        # Plot Jupiter
         ax.plot(Lx_jupiter[:i + 1], Ly_jupiter[:i + 1], Lz_jupiter[:i + 1], c="#d8ca9d", linewidth=1.2)
         ax.scatter(Lx_jupiter[i], Ly_jupiter[i], Lz_jupiter[i], s=70, c='#c99039', marker='o')
         ax.text(5 + Lx_jupiter[i], 5 + Ly_jupiter[i], 5 + Lz_jupiter[i], "Jupiter", color="white", size=5)
 
+        # Plot Saturn
         ax.plot(Lx_saturn[:i + 1], Ly_saturn[:i + 1], Lz_saturn[:i + 1], c="#C5AB6E", linewidth=1.2)
         ax.scatter(Lx_saturn[i], Ly_saturn[i], Lz_saturn[i], s=55.4, c='#A49B72', marker='o')
         ax.text(5 + Lx_saturn[i], 5 + Ly_saturn[i], 5 + Lz_saturn[i], "Saturn", color="white", size=5)
 
+        # Plot Uranus
         ax.plot(Lx_uranus[:i + 1], Ly_uranus[:i + 1], Lz_uranus[:i + 1], c="#BBE1E4", linewidth=1.2)
         ax.scatter(Lx_uranus[i], Ly_uranus[i], Lz_uranus[i], s=30, c='#93B8BE', marker='o')
         ax.text(5 + Lx_uranus[i], 5 + Ly_uranus[i], 5 + Lz_uranus[i], "Uranus", color="white", size=5)
 
+        # Plot Neptune
         ax.plot(Lx_neptune[:i + 1], Ly_neptune[:i + 1], Lz_neptune[:i + 1], c="#6081FF", linewidth=1.2)
         ax.scatter(Lx_neptune[i], Ly_neptune[i], Lz_neptune[i], s=30, c='#3E54E8', marker='o')
         ax.text(5 + Lx_neptune[i], 5 + Ly_neptune[i], 5 + Lz_neptune[i], "Neptune", color="white", size=5)
 
+        # Plot Pluto
         ax.plot(Lx_pluto[:i + 1], Ly_pluto[:i + 1], Lz_pluto[:i + 1], c="#ddc4af", linewidth=1.2)
         ax.scatter(Lx_pluto[i], Ly_pluto[i], Lz_pluto[i], s=0.38, c='#968570', marker='o')
         ax.text(5 + Lx_pluto[i], 5 + Ly_pluto[i], 5 + Lz_pluto[i], "Pluto", color="white", size=5)

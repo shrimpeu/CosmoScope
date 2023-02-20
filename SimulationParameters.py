@@ -12,9 +12,9 @@ spice.furnsh('naif0012.tls')
 #                                           Simulation parameters
 #=======================================================================================================
 
-t_start = spice.spiceypy.str2et('1974 Jan 02 00:00:00.0000')        # start time of the simulation
+t_start = spice.spiceypy.str2et('2007 Jan 02 00:00:00.0000')        # start time of the simulation
 
-t_end = spice.spiceypy.str2et('1990 Jan 02 00:00:00.0000')          # end time of simulation
+t_end = spice.spiceypy.str2et('2023 Jan 02 00:00:00.0000')          # end time of simulation
 
 dt = 3*24*3600                                                        # timestep
 
