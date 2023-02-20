@@ -10,25 +10,29 @@ img = mpimg.imread('space_bg2.png')
 
 # Define a function to animate the plot
 def animate_func(i):
-    # --------------------------------------------------------------------------------------
-    # PROCEDURE
-    # Animating the plot for real time results.
-    # --------------------------------------------------------------------------------------
+    # This function takes an integer i as input
+    # i represents the current frame of the animation
 
-    ax.set_facecolor('none')             # Sets the color of imaginary square to black
+    # Set the color of the figure background to black
+    ax.set_facecolor('none')
 
+    # Clear the current plot and turn off the axis display
     ax.clear()
     ax.set_axis_off()
 
+    # Set the position and size of the plot
+    # border defines the size of the border around the plot
+    # width defines the width of the plot including the border
     width = 1000
     border = 1500
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
 
-
+    # Check if the current time (timescale[i]) is less than or equal to the end time (t_end)
     if timescale[i] <= t_end:
+        # Set the title of the plot to the current time (formatted as a string)
         fig.suptitle('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), fontsize=16)
 
-        # Plot the Sun
+        # Plot the Sun as a yellow sphere at the origin
         ax.scatter(0, 0, 0, s=150, c="yellow")
         ax.text(0, 0, 0, "Sun", color="white")
 
