@@ -1,9 +1,7 @@
 from matplotlib import animation
 import matplotlib.image as mpimg
-from SimulationParameters import *
 from PropagationModule import *
 import numpy as np
-import ast
 from mpl_toolkits.mplot3d import Axes3D
 
 # Load the image
@@ -27,15 +25,12 @@ def animate_func(i):
     border = 1500
     ax.set_position([border / width, 0, (width - border * 2) / width, 1])
 
-    ax.scatter(0, 0, 0, s=150, c="yellow")
-    ax.text(0, 0, 0, "Sun", color="white")
-
-
 
     if timescale[i] <= t_end:
         fig.suptitle('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), fontsize=16)
-        # time_str = 'TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 0)
-        # ax.text(2, 2, 2, time_str, transform=ax.transAxes, ha='right', va='top', fontsize=10)
+
+        ax.scatter(0, 0, 0, s=150, c="yellow")
+        ax.text(0, 0, 0, "Sun", color="white")
 
         ax.plot(Lx_mercury[:i + 1], Ly_mercury[:i + 1], Lz_mercury[:i + 1], c="#ffffff", linewidth=1.2)
         ax.scatter(Lx_mercury[i], Ly_mercury[i], Lz_mercury[i], s=1.38, c='#808080', marker='o')
@@ -45,18 +40,17 @@ def animate_func(i):
         ax.scatter(Lx_venus[i], Ly_venus[i], Lz_venus[i], s=10, c='#E9CA09', marker='o')
         ax.text(5 + Lx_venus[i], 5 + Ly_venus[i], 5 + Lz_venus[i], "Venus", color="white", size=5)
 
-        ax.plot(Lx_earth[:i + 1], Ly_earth[:i + 1], Lz_earth[:i + 1], c="#E9ECAA", linewidth=1.2)
+        ax.plot(Lx_earth[:i + 1], Ly_earth[:i + 1], Lz_earth[:i + 1], c="#00FFFF", linewidth=1.2)
         ax.scatter(Lx_earth[i], Ly_earth[i], Lz_earth[i], s=10.72, c='#0000ff', marker='o')
         ax.text(5 + Lx_earth[i], 5 + Ly_earth[i], 5 + Lz_earth[i], "Earth", color="white", size=5)
 
-        ax.plot(Lx_mars[:i + 1], Ly_mars[:i + 1], Lz_mars[:i + 1], c="#E9ECAA", linewidth=1.2)
+        ax.plot(Lx_mars[:i + 1], Ly_mars[:i + 1], Lz_mars[:i + 1], c="#FFC0CB", linewidth=1.2)
         ax.scatter(Lx_mars[i], Ly_mars[i], Lz_mars[i], s=10.5, c='#ff0000', marker='o')
         ax.text(5 + Lx_mars[i], 5 + Ly_mars[i], 5 + Lz_mars[i], "Mars", color="white", size=5)
 
         ax.plot(Lx_jupiter[:i + 1], Ly_jupiter[:i + 1], Lz_jupiter[:i + 1], c="#EBC0B7", linewidth=1.2)
         ax.scatter(Lx_jupiter[i], Ly_jupiter[i], Lz_jupiter[i], s=70, c='#B3280A', marker='o')
         ax.text(5 + Lx_jupiter[i], 5 + Ly_jupiter[i], 5 + Lz_jupiter[i], "Jupiter", color="white", size=5)
-        # labels["Jupiter"].set_visible(False)
 
         ax.plot(Lx_saturn[:i + 1], Ly_saturn[:i + 1], Lz_saturn[:i + 1], c="#BDB9AD", linewidth=1.2)
         ax.scatter(Lx_saturn[i], Ly_saturn[i], Lz_saturn[i], s=55.4, c='#7C5029', marker='o')
@@ -73,8 +67,6 @@ def animate_func(i):
         ax.plot(Lx_pluto[:i + 1], Ly_pluto[:i + 1], Lz_pluto[:i + 1], c="#FFC0CB", linewidth=1.2)
         ax.scatter(Lx_pluto[i], Ly_pluto[i], Lz_pluto[i], s=0.38, c='#A52A2A', marker='o')
         ax.text(5 + Lx_pluto[i], 5 + Ly_pluto[i], 5 + Lz_pluto[i], "Pluto", color="white", size=5)
-
-        # ax.set_title('TIME ' + spice.spiceypy.et2utc(timescale[i], "C", 3), loc='center')
 
         # Adjustes the distance of planets to the sun
 
@@ -108,10 +100,10 @@ def on_scroll(event):
     if ax is not None:
         if event.button == 'up':
             # Zoom in
-            ax.dist = max(ax.dist - 10, 0)
+            ax.dist = max(ax.dist - 20, 0)
         elif event.button == 'down':
             # Zoom out
-            ax.dist += 10
+            ax.dist += 20
 
 # ==================================================================
 #                               MAIN
@@ -241,7 +233,7 @@ Lz_pluto = Coordinates(reg_pos, 9)[2]
 
 # Adds a bg image
 fig = plt.figure("Solar System simulation", dpi=150)
-ax = fig.add_subplot(222, projection='3d')  # 3D plot
+ax = fig.add_subplot(111, projection='3d')  # 3D plot
 fig.figimage(img, alpha=0.3, resize='auto')
 
 ax.set_facecolor('none')
@@ -259,7 +251,7 @@ fig.canvas.mpl_connect('scroll_event', on_scroll)
 
 timescale = np.arange(t_start, t_end + 2 * dt, dt)  # generating time scale
 
-simulation = animation.FuncAnimation(fig, animate_func, interval=100, frames=abs(int(t_end)), blit=False)
+simulation = animation.FuncAnimation(fig, animate_func, interval=50, frames=abs(int(t_end)), blit=False)
 
 plt.tight_layout()
 
