@@ -249,7 +249,7 @@ ax.set_facecolor('none')
 ax.set_axis_off()
 
 figManager = plt.get_current_fig_manager()
-figManager.window.state('zoomed')
+figManager.window.showMaximized()
 
 plt.rcParams['axes.facecolor'] = 'black'  # axes in black
 plt.rcParams['text.color'] = 'white'  # texts in white
