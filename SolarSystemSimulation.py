@@ -5,7 +5,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
 # Load the image
-img = mpimg.imread(r'C:\Users\Christian\CosmoScope\space_bg2.png')
+img = mpimg.imread('space_bg2.png')
 
 
 # Define a function to animate the plot
