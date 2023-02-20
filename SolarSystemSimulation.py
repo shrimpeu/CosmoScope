@@ -81,7 +81,7 @@ def animate_func(i):
         ax.scatter(Lx_pluto[i], Ly_pluto[i], Lz_pluto[i], s=0.38, c='#968570', marker='o')
         ax.text(5 + Lx_pluto[i], 5 + Ly_pluto[i], 5 + Lz_pluto[i], "Pluto", color="white", size=5)
 
-        # Adjustes the distance of planets to the sun
+        # Adjusts the distance of planets to the sun
 
         x_data = Coordinates(reg_pos, 4)[0]
         y_data = Coordinates(reg_pos, 4)[1]
@@ -202,56 +202,65 @@ reg_pos, reg_vel = leapfrog(pos_init, vel_init, mass)
 
 # Generating lists containing x,y,z position values of each bodies
 
+# x,y,z coordinates of Mercury's angular momentum vector
 Lx_mercury = Coordinates(reg_pos, 1)[0]
 Ly_mercury = Coordinates(reg_pos, 1)[1]
 Lz_mercury = Coordinates(reg_pos, 1)[2]
 
+# x,y,z coordinates of Mars' angular momentum vector
 Lx_mars = Coordinates(reg_pos, 2)[0]
 Ly_mars = Coordinates(reg_pos, 2)[1]
 Lz_mars = Coordinates(reg_pos, 2)[2]
 
+# x,y,z coordinates of Earth's angular momentum vector
 Lx_earth = Coordinates(reg_pos, 3)[0]
 Ly_earth = Coordinates(reg_pos, 3)[1]
 Lz_earth = Coordinates(reg_pos, 3)[2]
 
+# x,y,z coordinates of Venus' angular momentum vector
 Lx_venus = Coordinates(reg_pos, 4)[0]
 Ly_venus = Coordinates(reg_pos, 4)[1]
 Lz_venus = Coordinates(reg_pos, 4)[2]
 
+# x,y,z coordinates of Jupiter's angular momentum vector
 Lx_jupiter = Coordinates(reg_pos, 5)[0]
 Ly_jupiter = Coordinates(reg_pos, 5)[1]
 Lz_jupiter = Coordinates(reg_pos, 5)[2]
 
+# x,y,z coordinates of Saturn's angular momentum vector
 Lx_saturn = Coordinates(reg_pos, 6)[0]
 Ly_saturn = Coordinates(reg_pos, 6)[1]
 Lz_saturn = Coordinates(reg_pos, 6)[2]
 
+# x,y,z coordinates of Uranus' angular momentum vector
 Lx_uranus = Coordinates(reg_pos, 7)[0]
 Ly_uranus = Coordinates(reg_pos, 7)[1]
 Lz_uranus = Coordinates(reg_pos, 7)[2]
 
+# x,y,z coordinates of Neptune's angular momentum vector
 Lx_neptune = Coordinates(reg_pos, 8)[0]
 Ly_neptune = Coordinates(reg_pos, 8)[1]
 Lz_neptune = Coordinates(reg_pos, 8)[2]
 
+# x,y,z coordinates of Pluto's angular momentum vector
 Lx_pluto = Coordinates(reg_pos, 9)[0]
 Ly_pluto = Coordinates(reg_pos, 9)[1]
 Lz_pluto = Coordinates(reg_pos, 9)[2]
 
 
 # Animation show the evolution of bodies in the Solar System
-
 # 3D solar system figure
 
 
-# Adds a bg image
-fig = plt.figure("CosmoScope", dpi=150)
+fig = plt.figure("CosmoScope", dpi=150)     # create a figure and set the DPI
 ax = fig.add_subplot(111, projection='3d')  # 3D plot
-fig.figimage(img, alpha=0.3, resize='auto')
+fig.figimage(img, alpha=0.3, resize='auto') # add a background image to the figure with low alpha transparency
 
+# set face color and axis off
 ax.set_facecolor('none')
 ax.set_axis_off()
 
+# maximize the figure window
 figManager = plt.get_current_fig_manager()
 figManager.window.showMaximized()
 
@@ -260,12 +269,15 @@ plt.rcParams['text.color'] = 'white'  # texts in white
 fig.set_facecolor('black')  # black background
 
 ax.view_init(elev=-80, azim=-50)  # initial orientation of simulation
-fig.canvas.mpl_connect('scroll_event', on_scroll)
+fig.canvas.mpl_connect('scroll_event', on_scroll)   # set up scroll event
 
 timescale = np.arange(t_start, t_end + 2 * dt, dt)  # generating time scale
 
+# create animation using animate_func
 simulation = animation.FuncAnimation(fig, animate_func, interval=50, frames=abs(int(t_end)), blit=False)
 
+# adjust subplot layout
 plt.tight_layout()
 
+# show the plot
 plt.show()

@@ -2,10 +2,14 @@ import numpy as np
 import spiceypy as spice
 
 
-spice.tkvrsn('TOOLKIT')
-spice.furnsh('de440.bsp')
-spice.furnsh('p10-a.bsp')
-spice.furnsh('naif0012.tls')
+spice.tkvrsn('TOOLKIT')         # Print spiceypy toolkit version
+'''
+kernel files that contains information about the positions and velocities of 
+astronomical bodies, as well as time conversion information.
+'''
+spice.furnsh('de440.bsp')       # Load the de440.bsp ephemeris file
+spice.furnsh('p10-a.bsp')       # Load the p10-a.bsp ephemeris file
+spice.furnsh('naif0012.tls')    # Load the naif0012.tls leap seconds kernel file
  
 
 #=======================================================================================================
