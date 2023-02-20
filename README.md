@@ -7,7 +7,7 @@
 The program is structured in 3 files:
 - **Module (PropagationModule.py)** which contains all the functions needed to solve the n-body problem applied on the Solar System. This includes getting the initial conditions from NASA SPICE (Planet, Instrument, Events ephemeris) files through the spiceypy SPK kernel. 
 - **Parameters (SimulationParameters.py)** which contains the start time and end time of the simulation, timestep, Newton's Gravitational Constant, number of timesteps 
-- **Main (SolarSystemSimulation.py)** which contains the main program including the animation of the plots using Matplotlib. PLEASE RUN THIS CODE!
+- **Main (SolarSystemSimulation.py)** which contains the main program including the animation of the plots using Matplotlib. This is the python file where you run the code.
 
 ## Prerequisites 
 To run this code, a few packages are needed. If you are a beginner, I recommand to use Anaconda for easy package management.
