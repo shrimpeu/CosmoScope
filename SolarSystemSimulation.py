@@ -241,7 +241,7 @@ Lz_pluto = Coordinates(reg_pos, 9)[2]
 
 
 # Adds a bg image
-fig = plt.figure("Solar System simulation", dpi=150)
+fig = plt.figure("CosmoScope", dpi=150)
 ax = fig.add_subplot(111, projection='3d')  # 3D plot
 fig.figimage(img, alpha=0.3, resize='auto')
 
