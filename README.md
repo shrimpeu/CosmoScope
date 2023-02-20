@@ -12,11 +12,7 @@ The program is structured in 3 files:
 ## Prerequisites 
 To run this code, a few packages are needed. If you are a beginner, I recommand to use Anaconda for easy package management.
 ### Installation of SpiceyPy
-On Anaconda, you can use the following command: 
-```
-conda config --add channels conda-forge
-conda install spiceypy
-```
+
 For more information check (https://spiceypy.readthedocs.io/en/main/installation.html).
 ### Downloading the DE440 planets data from SPK Kernel
 Download starts automatically after clicking of this link: (https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440.bsp)
