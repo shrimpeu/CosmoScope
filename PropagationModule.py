@@ -91,7 +91,10 @@ def NbodyProblem(pos, mass):
     return acc
 
 
-
+'''
+This function calculates the kinetic and potential energies 
+of the celestial bodies in the system.
+'''
 def Energy(pos, vel, mass):
     
     #----------------------------------------------------------------------
@@ -141,7 +144,10 @@ def Energy(pos, vel, mass):
     return (E_kinetic,E_potential)
 
 
-
+'''
+The output of the function is a dictionary of all the positions and velocities 
+of the bodies at each time step of the simulation.
+'''
 def leapfrog(pos0, vel0, mass):
     
     #-------------------------------------------------------------------
@@ -184,7 +190,10 @@ def leapfrog(pos0, vel0, mass):
     return (pos_register,vel_register)
 
 
-
+'''
+This function calculates the kinetic, potential and total energy of a system of particles 
+over a given time period, using position and velocity information of the particles at each time step.
+'''
 def EnergyOverTime(pos_register,vel_register,mass):
     
     #-------------------------------------------------------------------
@@ -228,7 +237,11 @@ def EnergyOverTime(pos_register,vel_register,mass):
     return (_time, _KE, _PE, _TOT)       
 
 
-
+'''
+This function takes a dictionary containing the position matrix of all the bodies at all time steps of a 
+simulation, and an identification number for a specific body, and returns three lists of coordinates 
+corresponding to that body over time. 
+'''
 def Coordinates(register, body_id):
     
     #----------------------------------------------------------------
