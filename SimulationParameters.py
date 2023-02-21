@@ -7,9 +7,14 @@ spice.tkvrsn('TOOLKIT')         # Print spiceypy toolkit version
 kernel files that contains information about the positions and velocities of 
 astronomical bodies, as well as time conversion information.
 '''
-spice.furnsh('de440.bsp')       # Load the de440.bsp ephemeris file
-spice.furnsh('p10-a.bsp')       # Load the p10-a.bsp ephemeris file
-spice.furnsh('naif0012.tls')    # Load the naif0012.tls leap seconds kernel file
+# Load the de440.bsp ephemeris file
+spice.furnsh('de440.bsp')   # contains data on the positions and velocities of celestial bodies in the solar system
+
+# Load the p10-a.bsp ephemeris file
+spice.furnsh('p10-a.bsp')   # contains information on the orientation of the Earth
+
+# Load the naif0012.tls leap seconds kernel file
+spice.furnsh('naif0012.tls')    # This data adjusts UTC  in order to keep it synchronized with the rotation of the Earth
  
 
 #=======================================================================================================
