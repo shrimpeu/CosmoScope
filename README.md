@@ -10,7 +10,7 @@ The program is structured in 3 files:
 - **Main (SolarSystemSimulation.py)** which contains the main program including the animation of the plots using Matplotlib. This is the python file where you run the code.
 
 ## Prerequisites 
-To run this code, a few packages are needed. If you are a beginner, I recommand to use Anaconda for easy package management.
+To run this code, a few packages are needed. 
 ### Installation of SpiceyPy
 
 For more information check (https://spiceypy.readthedocs.io/en/main/installation.html).
